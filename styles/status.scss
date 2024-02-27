@@ -1,0 +1,21 @@
+.status {
+  margin: 0;
+  padding: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 7px;
+  padding-right: 7px;
+  width: max-content;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.nao_respondido {
+  background-color: #FFF8E4;
+  color: #E99A00;
+}
+
+.respondido {
+  background-color: #E1F5D5;
+  color: #219653;
+}

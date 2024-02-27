@@ -1,0 +1,32 @@
+@import './variables.scss';
+.exam {
+  border: 1px solid;
+  border-color: $border-color;
+  padding: 30px;
+  border-radius: 20px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.exam h1 {
+  font-weight: semibold;
+  font-size:16px;
+}
+
+.primary {
+  color: $primary;
+}
+
+.button {
+  background-color: $primary;
+  color: #fff;
+  border-radius: 42px;
+  border: none;
+  padding: 10px;
+
+  &:hover {
+    background-color: darken($primary, 10%);
+    cursor: pointer;
+  }
+}

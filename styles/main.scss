@@ -1,0 +1,15 @@
+@import "./variables.scss";
+
+body {
+  background-color: #fff;
+  padding:0;
+  margin: 0;
+  font-family: $primary-font;
+  color: $color
+}
+
+input[type="checkbox"] {
+  accent-color: $primary;
+  width: 16px;
+  height: 16px;;
+}

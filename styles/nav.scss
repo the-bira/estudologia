@@ -1,0 +1,21 @@
+@import "./variables.scss";
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.menu li > a {
+  text-decoration: none;
+  color: $secondary;
+  font-weight: bold;
+  font-size: 20px;
+
+  &.active {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    color: $primary;
+  }
+}
