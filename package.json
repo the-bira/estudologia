@@ -30,7 +30,8 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
     "vite": "^4.4.9",
-    "vite-plugin-ssr": "^0.4.142"
+    "vite-plugin-ssr": "^0.4.142",
+    "lucide-react": "^0.338.0"
   },
   "devDependencies": {
     "sass": "^1.71.1",
