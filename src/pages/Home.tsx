@@ -3,11 +3,10 @@ import Nav from '../components/Nav'
 import FilterForm from '../components/FilterForm'
 import ExamList from '../components/ExamsList'
 import Header from '../components/Header'
-import Modal from '../components/Modal'
 import Container from '../components/Container'
 
 import '../styles/home.scss'
-import AnsweredQuestionsNav from '../components/AnsweredQuestionsNav'
+import Answered from '../components/Answered'
 
 const Home = () => {
   const [activeNavItem, setActiveNavItem] = useState<string>('Questões')
@@ -30,7 +29,7 @@ const Home = () => {
               <ExamList showOnlyUnanswered={showOnlyUnanswered} />
             </>
 
-            : <AnsweredQuestionsNav />}
+            : <Answered />}
         </div>
       </Container>
     </>

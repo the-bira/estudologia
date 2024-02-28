@@ -6,7 +6,6 @@ interface AnsweredQuestionsProps {
 }
 
 import '../styles/answered-questions.scss'
-
 const AnsweredQuestions = ({ examId }: AnsweredQuestionsProps) => {
   const { getAnswerByExamIdAndQuestionIndex, findExamById } = useContext(AppContext)
 
@@ -14,13 +13,17 @@ const AnsweredQuestions = ({ examId }: AnsweredQuestionsProps) => {
 
   return (
     <div className="answered-questions">
-      {exam?.questions.map((question, index) => (
-        <>
-          <h1>{question.title}</h1>
-          <span> Resposta :</span>
-          <p>{getAnswerByExamIdAndQuestionIndex(examId, index)}</p>
-        </>
-      ))}
+      {exam?.questions.map((question, index) => {
+        const answer = getAnswerByExamIdAndQuestionIndex(examId, index)
+        return (
+          <>
+            <h1>{question.title}</h1>
+            <span> Resposta :</span>
+            <p>{answer ? answer : question.answer}</p>
+            <hr />
+          </>
+        )
+      })}
     </div>
   )
 }
