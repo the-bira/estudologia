@@ -1,0 +1,38 @@
+.textarea-container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Chivo", sans-serif;
+  font-weight: semibold;
+  font-size: 14px;
+
+  > textarea {
+    margin-top: 5px;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    font-family: "Chivo", sans-serif;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:focus-within {
+    border: 1px solid rgba(0,0,0,0.4);
+  }
+
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f3f3f3;
+  padding: 10px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  opacity: 0.4;
+}
+
+.input-value {
+}
