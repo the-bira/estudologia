@@ -3,16 +3,18 @@ import "../styles/exam.scss"
 import { Button } from '../ui/Button'
 import Status from './Status'
 import { StatusType } from '../types/ExamType'
+import { useNavigate } from 'react-router-dom'
 
 interface ExamType {
+  id: number
   title: string
   status: StatusType
   total: number
 }
 
-const Exam = ({ title, status, total }: ExamType) => {
+const Exam = ({ id, title, status, total }: ExamType) => {
 
-  status = 'NAO_RESPONDIDO'
+  const navigate = useNavigate()
 
   return (
     <div className="exam">
@@ -24,7 +26,7 @@ const Exam = ({ title, status, total }: ExamType) => {
 
       <span>{total} questões</span>
 
-      <Button text="Responder" className="button" onClick={() => { }} />
+      <Button text="Responder" className="button" onClick={() => { navigate(`/${id}`) }} disabled={status !== 'NAO_RESPONDIDO'} />
 
 
     </div>

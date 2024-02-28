@@ -1,0 +1,18 @@
+@import './variables.scss';
+
+.answer-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 400;
+  color: $color-secondary;
+  font-size: 16px;
+  padding:10px;
+}
+
+.move-left, .move-right {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

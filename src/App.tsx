@@ -1,27 +1,33 @@
-import { useEffect, useState } from 'react'
-import Exam from './components/Exam'
-import FilterForm from './components/FilterForm'
-import Header from './components/Header'
-import Nav from './components/Nav'
+
 import { AppProvider } from './context/app-context'
 import examsData from './data/exam.json'
-import './styles/main.scss'
-import Container from './components/Container'
-import ExamList from './components/ExamsList'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom"
+import Home from './pages/Home'
 
+import './styles/main.scss'
+import Answer from './pages/Answer'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: ":examId",
+    element: <Answer />,
+
+  },
+])
 
 function App() {
   console.log(examsData.exams)
   return (
-    <>
-      <AppProvider initialExams={examsData.exams}>
-        <Header />
-        <Container>
-          <Nav />
-          <ExamList />
-        </Container>
-      </AppProvider>
-    </>
+    <AppProvider initialExams={examsData.exams}>
+      <RouterProvider router={router} />
+    </AppProvider>
   )
 }
 

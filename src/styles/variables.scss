@@ -2,6 +2,25 @@
 
 $primary: #502db3;
 $secondary: #eee;
+$color-secondary: #7D8DA6;
 $primary-font: 'Chivo', sans-serif;
 $color: #141736;
 $border-color: #DFE5F1;
+
+.button {
+  background-color: $primary;
+  color: #fff;
+  border-radius: 42px;
+  border: none;
+  padding: 10px;
+
+  &:hover {
+    background-color: darken($primary, 10%);
+    cursor: pointer;
+  }
+}
+
+.button:disabled {
+  background-color: #E3DFEF;
+  cursor: not-allowed;
+}

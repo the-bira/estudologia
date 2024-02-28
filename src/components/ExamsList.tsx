@@ -5,28 +5,21 @@ import Exam from './Exam'
 
 import '../styles/exams-list.scss'
 
-interface ExamsListProps {
-  status?: StatusType
+interface ExamListProps {
+  showOnlyUnanswered: boolean
 }
-
-const ExamList = ({ status }: ExamsListProps) => {
+const ExamList = ({ showOnlyUnanswered }: ExamListProps) => {
 
   const { filterExamsByStatus, exams } = useContext(AppContext)
+  const filteredExams = showOnlyUnanswered
+    ? filterExamsByStatus('NAO_RESPONDIDO')
+    : exams
+
   return (
     <div className="exams-list">
-      {status && status === 'NAO_RESPONDIDO' ?
-        filterExamsByStatus(status).map((exam) => {
-          return (
-            <Exam key={exam.id} title={exam.name} status={status} total={exam.questions.length} />
-          )
-        })
-        :
-        exams.map((exam) => {
-          return (
-            <Exam key={exam.id} title={exam.name} status={exam.status} total={exam.questions.length} />
-          )
-        })
-      }
+      {filteredExams.map((exam) => (
+        <Exam key={exam.id} id={exam.id} title={exam.name} status={exam.status} total={exam.questions.length} />
+      ))}
     </div>
   )
 }

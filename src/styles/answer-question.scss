@@ -1,0 +1,25 @@
+@import './variables.scss';
+
+.answer-question-container {
+  padding:20px;
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
+
+.answer-question-container h1 {
+  color: $color-secondary;
+  font-size: 16px;
+}
+
+.answer-question-container .button {
+  width: fit-content;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 10px;
+}
+
+.answer-question-container p {
+  color: $color;
+  font-size: 16px;
+}
