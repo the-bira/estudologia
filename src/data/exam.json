@@ -1,0 +1,46 @@
+{
+  "exams": [
+    {
+      "id": 1,
+      "name": "Teste 1",
+      "timeSeconds": 10,
+      "timeAnswer": 0,
+      "status": "NAO_RESPONDIDO",
+      "questions": [
+        {
+          "title": "Questão 1",
+          "answer": null
+        },
+        {
+          "title": "Questão 2",
+          "answer": null
+        },
+        {
+          "title": "Questão 3",
+          "answer": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Teste 2",
+      "timeSeconds": 10,
+      "timeAnswer": 0,
+      "status": "NAO_RESPONDIDO",
+      "questions": [
+        {
+          "title": "Questão 1",
+          "answer": null
+        },
+        {
+          "title": "Questão 2",
+          "answer": null
+        },
+        {
+          "title": "Questão 3",
+          "answer": null
+        }
+      ]
+    }
+  ]
+}

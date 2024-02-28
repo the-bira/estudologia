@@ -1,15 +1,16 @@
 import '../styles/status.scss'
+import { StatusType } from '../types/ExamType'
 
-enum StatusType {
-  'em_andamento' = 'Em Andamento',
-  'respondido' = 'Respondido',
-  'nao_respondido' = 'Não Respondido',
+enum StatusTypeDesc {
+  'NAO_RESPONDIDO' = 'Não Respondido',
+  'RESPONDIDO' = 'Respondido',
+  'EM_ANDAMENTO' = 'Em Andamento'
 }
 
-const Status = ({ status }: { status: keyof typeof StatusType }) => {
+const Status = ({ status }: { status: StatusType }) => {
   return (
     <div className={`status ${status}`}>
-      {StatusType[status]}
+      {StatusTypeDesc[status]}
     </div >
   )
 }
