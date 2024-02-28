@@ -23,21 +23,3 @@
 .primary {
   color: $primary;
 }
-
-.button {
-  background-color: $primary;
-  color: #fff;
-  border-radius: 42px;
-  border: none;
-  padding: 10px;
-
-  &:hover {
-    background-color: darken($primary, 10%);
-    cursor: pointer;
-  }
-}
-
-.button:disabled {
-  background-color: #E3DFEF;
-  cursor: not-allowed;
-}

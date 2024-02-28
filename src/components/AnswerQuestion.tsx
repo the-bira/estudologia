@@ -5,6 +5,8 @@ import { AppContext } from '../context/app-context'
 import { Exam } from '../types/ExamType'
 
 import '../styles/answer-question.scss'
+import Modal from './Modal'
+import { useNavigate } from 'react-router'
 
 interface AnswerQuestionProps {
   exam: Exam
@@ -14,23 +16,31 @@ interface AnswerQuestionProps {
 
 const AnswerQuestion = ({ index, exam, onNext }: AnswerQuestionProps) => {
 
-  console.log(exam)
+  const [isModalOpen, setModalOpen] = useState(false);
 
-  const { answerQuestion } = useContext(AppContext)
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
+  const { answerQuestion, getAnswerByExamIdAndQuestionIndex, finishExam } = useContext(AppContext)
   const [answer, setAnswer] = useState('')
 
   const isLastQuestion = index === exam.questions.length - 1
-  const hasAnswered = exam.questions[index].answer !== null
+  const hasAnswered = getAnswerByExamIdAndQuestionIndex(exam.id, index)
+
+  const navigate = useNavigate()
 
   const handleAnswerQuestion = () => {
     answerQuestion(exam.id, index, answer)
+    if (isLastQuestion) {
+      openModal()
+      finishExam(exam.id)
+      return
+    }
     onNext()
   }
 
   useEffect(() => {
-    console.log('index changed', index)
-    console.log(exam.questions[index].answer)
-    setAnswer(hasAnswered ? exam.questions[index].answer : '')
+    setAnswer(getAnswerByExamIdAndQuestionIndex(exam.id, index))
   }, [index])
 
   return (
@@ -58,6 +68,8 @@ const AnswerQuestion = ({ index, exam, onNext }: AnswerQuestionProps) => {
         text={isLastQuestion ? 'Enviar Resposta e finalizar' : 'Enviar Resposta'}
         className="button"
         onClick={handleAnswerQuestion} />
+
+      <Modal isOpen={isModalOpen} onClose={closeModal} time={10} onClick={() => navigate('/')} />
 
     </div>
   )

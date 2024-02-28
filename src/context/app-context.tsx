@@ -5,39 +5,56 @@ type AppContextType = {
   exams: Exam[]
   filterExamsByStatus: (status: StatusType) => Exam[]
   answerQuestion: (examId: number, questionIndex: number, answer: string) => void
+  getAnswerByExamIdAndQuestionIndex: (examId: number, questionIndex: number) => string
   startExamTimer: (examId: number) => void
   finishExam: (examId: number) => void
   findExamById: (examId: number) => Exam | undefined
+}
+
+type QuestionAnswered = {
+  examId: number
+  questionIndex: number
+  answer: string
 }
 
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 export const AppProvider = ({ children, initialExams }: { children: React.ReactNode, initialExams: Exam[] }) => {
   const [exams, setExams] = useState(initialExams)
+  const [questionAnswered, setQuestionAnswered] = useState<QuestionAnswered[]>([])
 
   const filterExamsByStatus = (status: StatusType) => exams.filter((exam) => exam.status === status)
 
   const answerQuestion = (examId: number, questionIndex: number, answer: string) => {
-    setExams((prevExams) => {
-      const examIndex = prevExams.findIndex((exam) => exam.id === examId)
+    const answered = questionAnswered.find(
+      (question) => question.examId === examId && question.questionIndex === questionIndex
+    )
 
-      if (examIndex === -1) {
-        console.error(`Exame com ID ${examId} não encontrado.`)
-        return prevExams
-      }
+    if (!answered) {
+      setQuestionAnswered([
+        ...questionAnswered,
+        { examId, questionIndex, answer }
+      ])
+    } else {
+      setQuestionAnswered(
+        questionAnswered.map((question) =>
+          question.examId === examId && question.questionIndex === questionIndex ? { ...question, answer } : question
+        )
+      )
+    }
 
-      const updatedExams = [...prevExams]
-      updatedExams[examIndex] = {
-        ...updatedExams[examIndex],
-        questions: updatedExams[examIndex].questions.map((question, index) =>
-          index === questionIndex ? { ...question, answer } : question
-        ),
-      }
+  }
 
-      console.log(updatedExams)
+  const getAnswerByExamIdAndQuestionIndex = (examId: number, questionIndex: number) => {
+    const answered = questionAnswered.find(
+      (question) => question.examId === examId && question.questionIndex === questionIndex
+    )
 
-      return updatedExams
-    })
+    if (answered) {
+      return answered.answer
+    }
+
+    return ''
   }
 
 
@@ -90,21 +107,24 @@ export const AppProvider = ({ children, initialExams }: { children: React.ReactN
   }
 
   const finishExam = (examId: number) => {
-    setExams((prevExams) =>
-      prevExams.map((exam) =>
-        exam.id === examId && exam.status === 'EM_ANDAMENTO'
-          ? {
-            ...exam,
-            status: 'RESPONDIDO',
-            timeAnswer: exam.timeSeconds
-          }
-          : exam
-      )
-    )
+    const examIndex = exams.findIndex((exam) => exam.id === examId)
+    const examToFinish = exams.find((exam) => exam.id === examId)
+    if (examToFinish) {
+      examToFinish.status = 'RESPONDIDO'
+      initialExams[examIndex] = examToFinish
+
+      setExams(initialExams)
+    }
+
+
+
+
+
+
   }
 
   return (
-    <AppContext.Provider value={{ exams, filterExamsByStatus, answerQuestion, startExamTimer, finishExam, findExamById }}>
+    <AppContext.Provider value={{ exams, filterExamsByStatus, answerQuestion, startExamTimer, finishExam, findExamById, getAnswerByExamIdAndQuestionIndex }}>
       {children}
     </AppContext.Provider>
   )

@@ -1,5 +1,10 @@
-import { useState } from 'react';
-import '../styles/nav.scss';
+import { useState } from 'react'
+import '../styles/nav.scss'
+
+interface NavProps {
+  activeItem: string
+  onItemClick: (item: string) => void
+}
 
 type NavItem = {
   name: string
@@ -17,19 +22,16 @@ const menuItems: NavItem[] = [
   },
 ];
 
-const Nav = () => {
-  const [active, setActive] = useState(menuItems.find((item) => item) || menuItems[0]);
+const Nav = ({ activeItem, onItemClick }: NavProps) => {
 
-  const handleClick = (item: NavItem) => {
-    setActive(item);
-  };
+  console.log(activeItem)
 
   return (
     <nav>
       <ul className='menu'>
         {menuItems.map((item) => (
-          <li key={item.name} onClick={() => handleClick(item)}>
-            <a href="#" className={active === item ? 'active' : ''}>
+          <li key={item.name} onClick={() => onItemClick(item.name)}>
+            <a href="#" className={activeItem === item.name ? 'active' : ''}>
               {item.name}
             </a>
           </li>

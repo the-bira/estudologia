@@ -8,7 +8,6 @@ import AnswerQuestion from '../components/AnswerQuestion'
 import AnswerNavigation from '../components/AnswerNavigation'
 
 const Answer = () => {
-  console.log(useParams())
 
   const { examId } = useParams()
   const { findExamById } = useContext(AppContext)
